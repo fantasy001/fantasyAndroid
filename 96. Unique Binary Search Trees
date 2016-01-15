@@ -1,0 +1,26 @@
+/* 
+  3 possible patterns to insert n :
+    1.  bst            2.     n          3.  bst     
+          \                  /                 \
+           n               bst                  n
+                                               /
+                                             bst  
+*/
+class Solution {
+private:
+    vector<int> res;
+public:
+    int numTrees(int n) {
+        res.push_back(0);
+        res.push_back(1);      //base case: d(0) = 1
+        int i,temp=0,j;
+        for(i=2;i<=n;i++){
+            temp = 0;
+            for(j=1;j<i-1;j++){                     
+                temp += res[j]*res[i-1-j];
+            }                             
+            res.push_back(2*res.back()+temp);     /*function: d(n) = d(n-1) + d(n-1)   + d(1)*d(n-1-1) + d(2)*d(n-1-2) + ... + d(n-1-1)*d(1)*/
+        }                                         /*                pattern1  pattern2   <-------------------- pattern3 ------------------->*/
+        return res.back();
+    }
+};
