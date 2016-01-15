@@ -1,0 +1,15 @@
+class Solution {
+private:
+    vector<int> res;
+public:
+    int rob(vector<int>& nums) {
+        int temp;
+        res.push_back(0);
+        res.push_back(0);
+        for(auto n:nums){
+            temp = max(res[res.size()-2]+n,res.back());
+            res.push_back(temp);
+        }
+        return res.back();
+    }
+};
