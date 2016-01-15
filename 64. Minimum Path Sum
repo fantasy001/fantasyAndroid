@@ -1,4 +1,4 @@
-/* Very similar to "62.Unique paths(https://github.com/fantasy001/leetcode/blob/master/62.%20Unique%20Paths)" */
+/* Very similar to "62.Unique paths( https://github.com/fantasy001/leetcode/blob/master/62.%20Unique%20Paths )" */
 class Solution {
 private:
     vector<vector<int>> res;
