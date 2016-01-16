@@ -1,0 +1,38 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int getLength(ListNode* head){
+        ListNode *begin = head;
+        int count = 0;
+        while(begin){
+            count++;
+            begin = begin->next;
+        }
+        return count;
+    }
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head == NULL) return head;
+        int len = getLength(head);
+        int mov = k%len,i;
+        if(mov == 0) return head;
+        ListNode *start = head;
+        ListNode *end = head;
+        while(end->next != NULL){
+            end = end->next;
+        }
+        end->next = start;                /*transform the original singly-linked list to circular singly-linked list*/
+        for(i=0;i<len-mov;i++){           /*Attention: here we did reversely rotate, so we just need rotate (len-mov) times*/
+            start = start->next;
+            end   = end->next;
+        }
+        end->next = NULL;
+        return start;
+    }
+};
