@@ -1,0 +1,42 @@
+/* Similar to 3Sum */
+class Solution {
+private:
+    vector<vector<int>> res;
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int numlen = nums.size(),left,right;  
+        if(nums.size()<4)return res;  
+        sort(nums.begin(),nums.end());  
+        set<vector<int>> tmpres;                    //use set to prevent duplicated results
+        for(int i = 0; i < numlen; i++)  
+        {  
+            for(int j = i+1; j < numlen; j++)  
+            {  
+                left = j+1;  
+                right = numlen-1;  
+                while(left < right)  
+                {  
+                    int sum = nums[i]+ nums[j] + nums[left] + nums[right];  
+                    if(sum == target)  
+                    {  
+                        vector<int> tmp;  
+                        tmp.push_back(nums[i]);  
+                        tmp.push_back(nums[j]);  
+                        tmp.push_back(nums[left]);  
+                        tmp.push_back(nums[right]);  
+                        tmpres.insert(tmp);  
+                        left++;  
+                        right--;  
+                    }else if(sum<target)  
+                        left++;  
+                    else  
+                        right--;  
+                }  
+            }  
+        }  
+        set<vector<int>>::iterator it = tmpres.begin();  
+        for(; it != tmpres.end(); it++)  
+            res.push_back(*it);  
+        return res;  
+    }
+};
