@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int i,len = nums.size();
+        for(i=0;i<nums.size();i++){
+            if(nums[i] == val) {nums[i] = 0x7fffffff;len--;}
+        }
+        sort(nums.begin(),nums.end());
+        return len;
+    }
+};
