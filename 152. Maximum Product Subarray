@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+       int local_max=nums[0],global_max=nums[0],local_min=nums[0];
+       int i=0;
+       for(i=1;i<nums.size();i++){
+           int a = local_max*nums[i];
+           int b = local_min*nums[i];
+           local_max = max(max(a,b),nums[i]);
+           local_min = min(min(a,b),nums[i]);
+           global_max = max(global_max,local_max);
+       }
+       return global_max;
+    }
+};
