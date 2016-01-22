@@ -1,0 +1,30 @@
+class Solution {
+private:
+    vector<vector<int>> res;
+public:
+    void dfs_search(vector<int>& candidates,vector<int>& v, int target, int start){
+        if(target == 0){
+            res.push_back(v);
+            return;
+        }
+        if(start >= candidates.size() || target < 0) {return;}
+        int i;
+        for(i=0;i<=target;i+=candidates[start]){
+            if(i!=0)
+                v.push_back(candidates[start]);
+            dfs_search(candidates,v,target-i,start+1);
+        }
+        for(i=0;i<=target;i+=candidates[start]){
+            if(i==0) continue;
+                v.pop_back();
+        }
+        return;
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<int> v;
+        sort(candidates.begin(),candidates.end());
+        dfs_search(candidates,v,target,0);
+        sort(res.begin(),res.end());
+        return res;
+    }
+};
