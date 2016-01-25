@@ -1,0 +1,31 @@
+class Solution {
+public:
+    stack<string> stk;
+public:
+    string simplifyPath(string path) {
+        int i,start=0, len = path.length();
+        char *s = (char *)path.data();
+        const char *delim = "/";
+        string res="";
+        char *ptr = strtok(s,delim);
+        while(ptr!=NULL){
+            if((string)ptr == ".") {
+                ptr = strtok(NULL,delim);
+                continue;
+            }
+            else if((string)ptr == ".."){
+                if(!stk.empty()) stk.pop();
+            }else{
+                stk.push((string)ptr);
+            }
+            ptr = strtok(NULL,delim);
+        }
+        if(stk.empty()) res = "/";
+        while(!stk.empty()){
+            string temp = stk.top();
+            res = "/" + temp + res;
+            stk.pop();
+        }
+        return res;
+    }
+};
