@@ -1,0 +1,48 @@
+string iToR_digit(int i,int j){
+    string str;
+    if(i==0) return str;
+    while(i!=0){
+        switch(i){
+            case 1:
+            case 2:
+            case 3: if(j==1000) str += "M";
+                    if(j==100)  str += "C";
+                    if(j==10)   str += "X";
+                    if(j==1)    str += "I";
+                    i--; break;
+            case 4: if(j==100)  str = "CD";
+                    if(j==10)   str = "XL";
+                    if(j==1)    str = "IV";
+                    i-=4; break;
+            case 5:
+            case 6:
+            case 7:
+            case 8: if(j==100)  str = "D";
+                    if(j==10)   str = "L";
+                    if(j==1)    str = "V";
+                    i-=5;break;
+            case 9: if(j==100)  str = "CM";
+                    if(j==10)   str = "XC";
+                    if(j==1)    str = "IX";
+                    i-=9;break;
+        }
+    }
+    return str;
+}
+class Solution {
+public:
+    string intToRoman(int num) {
+        string res;
+        int i=0,j=1;
+        i = num%10;
+        res = iToR_digit(i,j) + res;
+        num /= 10;
+        while(num > 0){
+            i = num%10;
+            j *= 10;
+            res = iToR_digit(i,j) + res;
+            num /= 10;
+        }
+        return res;
+    }
+};

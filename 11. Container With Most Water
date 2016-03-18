@@ -1,0 +1,15 @@
+/*                     Greedy algorithm                     */
+/*      result = Max((j-i)*min(height[i],height[j]))        */
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int i=0,j=height.size()-1,max_water=0,water;
+        while(i<j){
+            water = (j-i) * min(height[i],height[j]);
+            if(water > max_water) max_water = water;
+            if(height[i] < height[j]) i++;
+            else j--;
+        }
+        return max_water;
+    }
+};

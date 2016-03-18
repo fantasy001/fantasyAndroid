@@ -1,0 +1,39 @@
+class Solution {
+private:
+    vector<int> res;
+public:
+    void spiral_loop(int x,vector<vector<int>>& matrix,int m,int n,int start){
+        if(m<=0 || n<=0) return;
+        if(n==1) {
+            int len = matrix.size()*matrix[0].size();
+            for(int i=0;i<m;i++)
+                res[len-m+i] = matrix[x][x+i];
+            return;
+        }
+        if(m==1){
+            int len = matrix.size()*matrix[0].size();
+            for(int i=0;i<n;i++)
+                res[len-n+i] = matrix[x+i][x];
+            return;
+        }
+        int i,j;
+        for(i=0;i<m-1;i++){
+            res[start+i] = matrix[x][x+i];
+            res[start+m+n-2+i] = matrix[x+n-1][x+m-1-i];
+        }
+        for(j=0;j<n-1;j++){
+            res[start+m-1+j] = matrix[x+j][x+m-1];
+            res[start+2*m+n-3+j] = matrix[x+n-1-j][x];
+        }
+        start += 2*(m+n)-4;
+        spiral_loop(x+1,matrix,m-2,n-2,start);
+    }
+    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int len1 = matrix.size();
+        if(len1 == 0) return res;
+        int len2 = matrix[0].size();
+        res.resize(len1*len2);
+        spiral_loop(0,matrix,len2,len1,0);
+        return res;
+    }
+};

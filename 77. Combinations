@@ -1,0 +1,24 @@
+class Solution {
+private:
+    vector<vector<int>> res;
+    vector<int> v;
+public:
+    void dfs_search(int start,int m,int n, int k){
+        if(m > k){
+            res.push_back(v);
+            return;
+        }
+        if(start > n) return;
+        int i;
+        for(i=start;i<=n;i++){
+            v.push_back(i);
+            dfs_search(i+1,m+1,n,k);
+            v.pop_back();
+        }
+        return;
+    }
+    vector<vector<int>> combine(int n, int k) {
+        dfs_search(1,1,n,k);
+        return res;
+    }
+};

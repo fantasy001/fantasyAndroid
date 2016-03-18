@@ -1,0 +1,14 @@
+class Solution {
+private:
+    vector<int> res;
+public:
+    int climbStairs(int n) {
+        int i;
+        res.push_back(0);
+        res.push_back(1);
+        for(i=0;i<n;i++){
+            res.push_back(res[res.size()-2]+res.back());
+        }
+        return res.back();
+    }
+};

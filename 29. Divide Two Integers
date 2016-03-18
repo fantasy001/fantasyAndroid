@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int divide(int dividend, int divisor) {
+        long long dividend_l, divisor_l, res=0,digit = 0;
+        int sign = 0;
+        if(dividend < 0) sign++;
+        if(divisor < 0) sign++;
+        dividend_l = abs((long long)dividend);
+        divisor_l  = abs((long long)divisor);
+        while(dividend_l >= divisor_l){
+            divisor_l <<= 1;
+            digit++;
+        }
+        divisor_l >>= 1;
+        digit--;
+        while(digit >= 0){
+            if(dividend_l >= divisor_l){
+                res += ((long long)1<<digit); //caution!! 1 is int as default
+                dividend_l -= divisor_l;
+            }
+            digit--;
+            divisor_l >>= 1;
+        }
+        if(sign == 1) res = -res;
+        if(res > 0x7fffffff) res = 0x7fffffff;
+        return res;
+    }
+};

@@ -1,0 +1,23 @@
+class Solution {
+private:
+    vector<vector<int>> res;
+    vector<int> v;
+public:
+    void dfs_search(int start,vector<int>& nums){
+        int len = nums.size(),i=0;
+        if(start >= len) return;
+        for(i=start;i<len;i++){
+            v.push_back(nums[i]);
+            res.push_back(v);
+            dfs_search(i+1,nums);
+            v.pop_back();
+        }
+        return;
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        res.push_back(v);
+        dfs_search(0,nums);
+        return res;
+    }
+};

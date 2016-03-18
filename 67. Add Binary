@@ -1,0 +1,21 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        int len1 = a.length(),len2 = b.length(),i,j,carries=0;
+        string res="";
+        i = len1-1;
+        j = len2-1;
+        while(i>=0||j>=0){
+            int digit1,digit2,result;
+            i < 0? digit1 = 0 : digit1 = a[i] - '0';
+            j < 0? digit2 = 0 : digit2 = b[j] - '0';
+            result = digit1 + digit2 + carries;
+            carries = result/2;
+            res = (char)((result%2) + '0') + res;
+            i--;
+            j--;
+        }
+        if(carries > 0) res = (char)(carries + '0') + res;
+        return res;
+    }
+};
